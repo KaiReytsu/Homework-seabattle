@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<title>
+			Морской бой
+		</title>
+        <script>
+            var socket = '{{socket}}'
+            var gameid = '{{gameid}}'
+        </script>
+		<script
+     		src="static/js/game_script.js">
+		</script>
+        <link rel="stylesheet" href="static/css/style.css" />
+		<link rel="stylesheet" href="static/css/color.css" />
+		<link rel="shortcut icon" type="image/x-icon" href="ship.ico" />
+	</head>
+	<body class="game_body">
+
+        <!-- <input type="button" value="нажми меня" onclick="clicktest()"> -->
+		<div class="div_my_ship">
+            <table>
+                <caption class='ships' id="ship">Мои корабли</caption>
+                <tr>
+                    <th></th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
+                    <th>E</th>
+                    <th>F</th>
+                    <th>G</th>
+                    <th>H</th>
+                    <th>I</th>
+                    <th>J</th>
+                </tr>
+                {% for index in range(10) %}
+                <tr>
+                    <td>{{index + 1}}</td>
+                    {% for item in range(10)%}
+                    <td class="gameplay"></td>
+                    {%endfor%}
+                </tr>
+                {%endfor%}
+            </table>
+            <p>Расставь корабли на поле</p>
+            <img src="static/img/1_cage/full_ship.png" alt="water">
+        </div>
+        <div class="div_your_ship">
+            <table>
+                <caption class='ships' id="ship">Корабли соперника</caption>
+                <tr>
+                    <th></th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>D</th>
+                    <th>E</th>
+                    <th>F</th>
+                    <th>G</th>
+                    <th>H</th>
+                    <th>I</th>
+                    <th>J</th>
+                </tr>
+                {% for index in range(10) %}
+                <tr>
+                    <td>{{index + 1}}</td>
+                    {% for item in range(10)%}
+                    <td class="gameplay"></td>
+                    {%endfor%}
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+	</body>
+</html>
+
+
+
+<!-- 
+<td><img src="../static/img/past.png" alt="water"></td>
+<td><img src="../static/img/past.png" alt="water"></td>
+<td><img src="../static/img/past.png" alt="water"></td>
+<td><img src="../static/img/past.png" alt="water"></td>
+<td><img src="../static/img/past.png" alt="water"></td>
+<td><img src="../static/img/past.png" alt="water"></td>
+<td><img src="../static/img/past.png" alt="water"></td>
+<td><img src="../static/img/past.png" alt="water"></td>
+<td><img src="../static/img/past.png" alt="water"></td>
+<td><img src="../static/img/past.png" alt="water"></td> -->

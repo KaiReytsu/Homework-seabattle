@@ -1,0 +1,11 @@
+body{
+    background-color:   rgb(189 203 225);
+}
+input{
+    background-color:   rgb(149 152 196);
+    color:              rgb(2 8 66);
+}
+.codetext{
+    background-color:   rgb(255, 255, 255);
+    color:              rgb(0, 0, 0);
+}

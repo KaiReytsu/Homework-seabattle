@@ -1,0 +1,42 @@
+.new_game{
+    position: relative;
+    left: 35%;
+    margin: 273px 0 0 0;
+}
+.join_game{
+    position: relative;
+    left: 35%;
+    margin: 52px 0;
+}
+input{
+    padding: 6px 31px;
+    border-radius: 9px;
+    font-size: 34px;
+}
+img{
+    width: 40px;
+}
+.game_body{
+    padding: 57px;
+}
+.gameplay{
+    border:             1px solid rgb(0, 0, 0);
+    width:              40px;
+    height:             40px;
+}
+.codetext{
+    padding:            6px 7px;
+    border-radius:      4px;
+    font-size:          29px;
+}
+.div_my_ship{
+    float:              left;
+    padding-left:       20%;
+}
+.div_your_ship{
+    float:              right;
+    padding-right:      20%;
+}
+.ships{
+    font-size:          25px;
+}

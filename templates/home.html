@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<title>
+			Морской бой
+		</title>
+		<script
+     		src="static/js/home_script.js">
+		</script>
+        <link rel="stylesheet" href="static/css/style.css" />
+		<link rel="stylesheet" href="static/css/color.css" />
+		<link rel="shortcut icon" type="image/x-icon" href="ship.ico" />
+	</head>
+	<body>
+		<div class="new_game">
+			<a href="create_game">
+				<input type="button" value="Играть">
+			</a>
+		</div>
+			<div class="join_game">
+				<p>
+					<input class='codetext' id="codetext" type="text" value="Введите код" name="codetext">
+				</p>
+					<input type="button" value="Присоединиться к игре" onclick="connect()">
+			</div>
+			<span id="notfound"></span>
+	</body>
+</html>
