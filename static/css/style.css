@@ -1,23 +1,23 @@
 .new_game{
-    position: relative;
-    left: 35%;
-    margin: 273px 0 0 0;
+    position:           relative;
+    left:               35%;
+    margin:             273px 0 0 0;
 }
 .join_game{
-    position: relative;
-    left: 35%;
-    margin: 52px 0;
+    position:           relative;
+    left:               35%;
+    margin:             52px 0 0;
 }
 input{
-    padding: 6px 31px;
-    border-radius: 9px;
-    font-size: 34px;
+    padding:            6px 31px;
+    border-radius:      9px;
+    font-size:          34px;
 }
 img{
-    width: 40px;
+    width:              40px;
 }
 .game_body{
-    padding: 57px;
+    padding:            57px;
 }
 .gameplay{
     border:             1px solid rgb(0, 0, 0);
@@ -36,7 +36,28 @@ img{
 .div_your_ship{
     float:              right;
     padding-right:      20%;
+    display:         none;
 }
 .ships{
     font-size:          25px;
 }
+.nogame{
+    position:           relative;
+    left:               35%;
+    font-size:          20px;
+}
+.loader {
+    float:              right;
+    margin-top:         14%;
+    margin-right:       26%;
+    border:             10px solid #3a3a3a;
+    border-top:         10px solid #3498db;
+    border-radius:      50%;
+    width:              80px;
+    height:             80px;
+    animation:          spin 2s linear infinite;
+  }
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

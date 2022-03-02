@@ -17,11 +17,11 @@
 		<link rel="shortcut icon" type="image/x-icon" href="ship.ico" />
 	</head>
 	<body class="game_body">
-
+        <h3 id="code">Код частной игы: <span id="private_code"></span></h3>
         <!-- <input type="button" value="нажми меня" onclick="clicktest()"> -->
 		<div class="div_my_ship">
             <table>
-                <caption class='ships' id="ship">Мои корабли</caption>
+                <caption class='ships'>Мои корабли</caption>
                 <tr>
                     <th></th>
                     <th>A</th>
@@ -47,9 +47,11 @@
             <p>Расставь корабли на поле</p>
             <img src="static/img/1_cage/full_ship.png" alt="water">
         </div>
-        <div class="div_your_ship">
+        <div class="loader" id="loader">
+        </div>
+        <div class="div_your_ship" id="your_ship">
             <table>
-                <caption class='ships' id="ship">Корабли соперника</caption>
+                <caption class='ships'>Корабли соперника</caption>
                 <tr>
                     <th></th>
                     <th>A</th>

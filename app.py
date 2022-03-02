@@ -1,3 +1,5 @@
+import asyncio
+import json
 import uuid
 from fastapi import FastAPI, WebSocket, Request, Response, status
 from fastapi.responses import HTMLResponse
@@ -6,8 +8,11 @@ from fastapi.templating import Jinja2Templates
 from starlette.responses import FileResponse
 from player import Player
 from game import Game
+import time
 
 games = {}
+ws_message = {'type': None,
+              'data': None}
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -50,7 +55,15 @@ async def host(websocket: WebSocket):
     game.players.append(player)
     game_uuid = uuid.uuid4().hex[:8]
     print(game_uuid)
+    ws_message['type'] = 'id'
+    ws_message['data'] = game_uuid
+    await websocket.send_json(ws_message)
     games[game_uuid] = game
+    while len(game.players) < 2:
+        await asyncio.sleep(0.1)
+    ws_message['type'] = 'service'
+    ws_message['data'] = 'new_player'
+    await websocket.send_json(ws_message)
     while True:
         data = await websocket.receive_text()
         player2 = game.players[1]
