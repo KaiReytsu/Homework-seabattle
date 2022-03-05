@@ -13,7 +13,10 @@ input{
     border-radius:      9px;
     font-size:          34px;
 }
-img{
+.single_deck{
+    width:              40px;
+}
+.double_deck{
     width:              40px;
 }
 .game_body{
@@ -36,7 +39,7 @@ img{
 .div_your_ship{
     float:              right;
     padding-right:      20%;
-    display:         none;
+    display:            none;
 }
 .ships{
     font-size:          25px;

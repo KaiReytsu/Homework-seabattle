@@ -39,13 +39,16 @@
                 <tr>
                     <td>{{index + 1}}</td>
                     {% for item in range(10)%}
-                    <td class="gameplay"></td>
+                    {% set cage_num = index * 10 + item%}
+                    <td class="gameplay" id='cage{{cage_num}}' onclick="placeship({{cage_num}})"></td>
                     {%endfor%}
                 </tr>
                 {%endfor%}
             </table>
             <p>Расставь корабли на поле</p>
-            <img src="static/img/1_cage/full_ship.png" alt="water">
+            {% for index in range(4)%}
+            <img class='single_deck' id='ship' src="static/img/1_cage/full_ship.png" alt="water" onclick="moveship({{index}})"/>
+            {%endfor%}
         </div>
         <div class="loader" id="loader">
         </div>

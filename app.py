@@ -1,7 +1,7 @@
 import asyncio
 import json
 import uuid
-from fastapi import FastAPI, WebSocket, Request, Response, status
+from fastapi import FastAPI, WebSocket, Request, Response, status, WebSocketDisconnect
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
@@ -54,7 +54,6 @@ async def host(websocket: WebSocket):
     game = Game()
     game.players.append(player)
     game_uuid = uuid.uuid4().hex[:8]
-    print(game_uuid)
     ws_message['type'] = 'id'
     ws_message['data'] = game_uuid
     await websocket.send_json(ws_message)
@@ -64,10 +63,14 @@ async def host(websocket: WebSocket):
     ws_message['type'] = 'service'
     ws_message['data'] = 'new_player'
     await websocket.send_json(ws_message)
-    while True:
-        data = await websocket.receive_text()
-        player2 = game.players[1]
-        await player2.ws.send_text(f"Message text was: {data}")
+    try:
+        while True:
+            data = await websocket.receive_json()
+    except WebSocketDisconnect:
+        print('Host sbejal')
+        ws_message['type'] = 'offline'
+        await game.players[1].ws.send_json(ws_message)
+
 
 @app.websocket("/client/{codetext}")
 async def client(websocket: WebSocket, codetext:str):
@@ -77,8 +80,12 @@ async def client(websocket: WebSocket, codetext:str):
     player.ws = websocket
     game = games[codetext]
     game.players.append(player)
-    while True:
-        data = await websocket.receive_text()
-        player1 = game.players[0]
-        await player1.ws.send_text(f"Message text was: {data}")
+    try:
+        while True:
+            data = await websocket.receive_json()
+    except Exception as e:  #WebSocketDisconnect:
+        print(e, 'Otvalilsya')
+        ws_message['type'] = 'offline'
+        await game.players[0].ws.send_json(ws_message)
+
 
