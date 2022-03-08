@@ -1,5 +1,6 @@
 var ws = null;
 var movemode = false;
+var shiptype = 0;
 document.addEventListener(
     "DOMContentLoaded",
 	function() {
@@ -49,13 +50,32 @@ document.addEventListener(
     function clicktest(){
         console.log('begin!!')
         console.log(ws)
-        ws.send('hi')
+        ws.send('hi');
 }
-function moveship(){
+function moveship(ship){
     movemode = true;
+    shiptype = ship;
+    
 }
-function placeship(num){
+function placeship(cell){
+    var img = document.getElementById('ship' + shiptype);
+    console.log(img)
     if(movemode){
         movemode = false;    //нужно ещё отнимать количество кораблей
+        if(cell.innerHTML == ''){
+            // cell.innerHTML = '';
+            img.setAttribute('onclick', "placeship(this)");
+            document.getElementById('ship' + shiptype).remove();
+            cell.appendChild(img);
+            console.log(cell)
+        }}else{
+            // if(cell.innerHTML != ''){
+                div = document.getElementById('single_deck');
+                img = document.getElementById('ship' + shiptype);
+                img.setAttribute('onclick', "moveship()");
+                console.log(img)
+                div.appendChild(img)
+                cell.innerHTML = '';
+            // }
     }
 }
