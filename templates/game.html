@@ -36,7 +36,7 @@
                     <th>J</th>
                 </tr>
                 {% for index in range(10) %}
-                <tr>
+                <tr class="gamerow">
                     <td>{{index + 1}}</td>
                     {% for item in range(10)%}
                     {% set cage_num = index * 10 + item%}
@@ -48,13 +48,15 @@
             <p>Расставь корабли на поле</p>
             <div id="single_deck">
                 {% for index in range(4)%}
-                <img class='single_deck' id='ship{{index}}' src="static/img/1_cage/full_ship.png" alt="water" onclick="moveship({{index}})"/>
+                <img class='single_deck' id='ship{{index}}' src="static/img/1_cage/full_ship.png" alt="water" onclick="moveship(this)"/>
                 {%endfor%}
             </div>
+            <input type="button" id = "ready_btn" disabled value="Готов" onclick="ready()">
         </div>
         <div class="loader" id="loader">
         </div>
         <div class="div_your_ship" id="your_ship">
+            <p>Ваш ход</p>
             <table>
                 <caption class='ships'>Корабли соперника</caption>
                 <tr>
@@ -74,7 +76,8 @@
                 <tr>
                     <td>{{index + 1}}</td>
                     {% for item in range(10)%}
-                    <td class="gameplay"></td>
+                    {% set fire_num = index * 10 + item%}
+                    <td class="gameplay enemy"  id='fire{{fire_num}}'></td>
                     {%endfor%}
                 </tr>
                 {%endfor%}

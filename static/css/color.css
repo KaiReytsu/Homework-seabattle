@@ -2,6 +2,9 @@ body{
     background-color:   rgb(189 203 225);
 }
 input{
+    color: black;
+}
+.start{
     background-color:   rgb(149 152 196);
     color:              rgb(2 8 66);
 }
