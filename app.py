@@ -64,8 +64,31 @@ async def host(websocket: WebSocket):
     ws_message['data'] = 'new_player'
     await websocket.send_json(ws_message)
     try:
+        message = await websocket.receive_json()
+        if message['type'] == 'ready':
+            player.field = message['data']
+            player.ready = True
+        while not game.players[1].ready:
+            await asyncio.sleep(0.1)
+        ws_message['type'] = 'ready'
+        print('host')
+        await websocket.send_json(ws_message)
         while True:
-            data = await websocket.receive_json()
+            message = await websocket.receive_json()
+            if message['type'] == 'shoot':
+                game.buffer = message['data']
+            while game.buffer != -2:
+                await asyncio.sleep(0.1)
+            i = game.buffer // 10
+            j = game.buffer % 10
+            ws_message['type'] = 'shoot'
+            if player.field[i][j]:
+                ws_message['data'] = 1
+            else:
+                ws_message['data'] = 0
+            game.buffer = -1
+            await websocket.send_json(ws_message)
+            
     except WebSocketDisconnect:
         print('Host sbejal')
         ws_message['type'] = 'offline'
@@ -81,11 +104,31 @@ async def client(websocket: WebSocket, codetext:str):
     game = games[codetext]
     game.players.append(player)
     try:
+        message = await websocket.receive_json()
+        if message['type'] == 'ready':
+            player.field = message['data']
+            player.ready = True
+        while not game.players[0].ready:
+            await asyncio.sleep(0.1)
+        ws_message['type'] = 'ready'
+        print('client')
+        await websocket.send_json(ws_message)
         while True:
-            data = await websocket.receive_json()
+            while game.buffer != -1:
+                await asyncio.sleep(0.1)
+            i = game.buffer // 10
+            j = game.buffer % 10
+            ws_message['type'] = 'shoot'
+            if player.field[i][j]:
+                ws_message['data'] = 1
+            else:
+                ws_message['data'] = 0
+            game.buffer = -2
+            await websocket.send_json(ws_message)
+            message = await websocket.receive_json()
+            if message['type'] == 'shoot':
+                game.buffer = message['data']
     except Exception as e:  #WebSocketDisconnect:
         print(e, 'Otvalilsya')
         ws_message['type'] = 'offline'
         await game.players[0].ws.send_json(ws_message)
-
-
